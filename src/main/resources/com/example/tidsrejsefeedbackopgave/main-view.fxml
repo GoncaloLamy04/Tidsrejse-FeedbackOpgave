@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane fx:id="root" prefHeight="503.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tidsrejsefeedbackopgave.controller.MainController">
+    <center>
+        <Label text="Main view virker" />
+    </center>
+    <top>
+        <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#showCustomers" text="Kundeadministration" />
+                <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showTimeMachines" text="Tidsrejsemaskiner" />
+                <Button layoutX="62.0" layoutY="10.0" mnemonicParsing="false" onAction="#showTimePeriods" text="Tidsperioder" />
+                <Button layoutX="114.0" layoutY="10.0" mnemonicParsing="false" onAction="#showGuides" text="Guides" />
+                <Button layoutX="247.0" layoutY="10.0" mnemonicParsing="false" onAction="#showBooking" text="Booking" />
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </HBox>
+    </top>
+</BorderPane>
