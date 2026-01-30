@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 
 public class CustomersController {
 
-    // UI
+    // UI (bruges af FXML via fx:id / onAction)
     @FXML private TextField nameField;
     @FXML private TextField emailField;
 
@@ -30,7 +30,7 @@ public class CustomersController {
 
     @FXML
     private void initialize() {
-        // IMPORTANT: Lambdas = ingen module/reflection problemer
+        // bindings til TableView
         idColumn.setCellValueFactory(cell -> new ReadOnlyObjectWrapper<>(cell.getValue().getId()));
         nameColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().getName()));
         emailColumn.setCellValueFactory(cell -> new ReadOnlyStringWrapper(cell.getValue().getEmail()));
@@ -42,7 +42,7 @@ public class CustomersController {
         updateButton.setDisable(true);
         deleteButton.setDisable(true);
 
-        customersTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSel, sel) -> {
+        customersTable.getSelectionModel().selectedItemProperty().addListener((ignored, ignored2, sel) -> {
             boolean hasSel = sel != null;
             updateButton.setDisable(!hasSel);
             deleteButton.setDisable(!hasSel);
@@ -60,18 +60,12 @@ public class CustomersController {
         String email = safeTrim(emailField.getText());
 
         if (name.isEmpty() || email.isEmpty()) {
-            warn("Manglende input", "Udfyld både navn og email.");
+            warnMissingInput();
             return;
         }
 
-        Customer c = new Customer(name, email);
-
-        // DAO returnerer kunden med id sat, så bruges return-værdien:
-        Customer created = dao.create(c);
-
-        // Add til table (ellers sker der “ingenting” i UI)
+        Customer created = dao.create(new Customer(name, email));
         customers.add(created);
-
         clear();
     }
 
@@ -84,7 +78,7 @@ public class CustomersController {
         String email = safeTrim(emailField.getText());
 
         if (name.isEmpty() || email.isEmpty()) {
-            warn("Manglende input", "Udfyld både navn og email.");
+            warnMissingInput();
             return;
         }
 
@@ -101,13 +95,9 @@ public class CustomersController {
         Customer sel = customersTable.getSelectionModel().getSelectedItem();
         if (sel == null) return;
 
-        // hvis du har dao.delete(sel.getId()); så kald den her
-        // dao.delete(sel.getId());
-
         dao.deleteCustomer(sel.getId());
         customers.remove(sel);
         clear();
-
     }
 
     @FXML
@@ -128,11 +118,12 @@ public class CustomersController {
         return s == null ? "" : s.trim();
     }
 
-    private void warn(String header, String content) {
+    // fast warning til validering
+    private void warnMissingInput() {
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setTitle("Validering");
-        a.setHeaderText(header);
-        a.setContentText(content);
+        a.setHeaderText("Manglende input");
+        a.setContentText("Udfyld både navn og email.");
         a.showAndWait();
     }
 }

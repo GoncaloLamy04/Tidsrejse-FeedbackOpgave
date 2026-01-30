@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class MainController {
 
@@ -43,14 +44,20 @@ public class MainController {
     }
 
     private void setCenter(String fxml) {
+        String path = "/com/example/tidsrejsefeedbackopgave/" + fxml;
+
+        URL resource = getClass().getResource(path);
+        if (resource == null) {
+            System.err.println("[FXML] Not found: " + path);
+            return;
+        }
+
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/tidsrejsefeedbackopgave/" + fxml)
-            );
-            Node view = loader.load();
+            Node view = FXMLLoader.load(resource);
             root.setCenter(view);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("[FXML] Could not load: " + path);
+            System.err.println("Reason: " + e.getMessage());
         }
     }
 }

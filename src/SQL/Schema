@@ -1,0 +1,39 @@
+CREATE DATABASE IF NOT EXISTS tidsrejse;
+USE tidsrejse;
+
+CREATE TABLE IF NOT EXISTS customer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS time_machine (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    capacity INT NOT NULL,
+    status ENUM('LEDIG', 'I_BRUG', 'SERVICE') NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS time_period (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS guide (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    specialty VARCHAR(150)
+);
+
+CREATE TABLE IF NOT EXISTS booking (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    time_machine_id INT NOT NULL,
+    time_period_id INT NOT NULL,
+    guide_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(id),
+    FOREIGN KEY (time_machine_id) REFERENCES time_machine(id),
+    FOREIGN KEY (time_period_id) REFERENCES time_period(id),
+    FOREIGN KEY (guide_id) REFERENCES guide(id)
+);

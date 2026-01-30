@@ -1,0 +1,19 @@
+USE tidsrejse;
+
+INSERT INTO customer (name, email) VALUES
+('Nicki', 'nicki@mail.dk'),
+('Goncalo', 'gon@mail.dk'),
+('Mattias', 'mat@mail.dk');
+
+INSERT INTO time_machine (name, capacity, status) VALUES
+('ChronoJet', 4, 'LEDIG'),
+('T-1000', 2, 'I_BRUG');
+
+INSERT INTO time_period (name, description) VALUES
+('Dinosaurernes æra', 'Før menneskets tid'),
+('Middelalderen', 'Riddertid og kongedømmer'),
+('Fremtiden', 'Ukendt teknologi');
+
+INSERT INTO guide (name, specialty) VALUES
+('Professor Quantum', 'Historisk ekspert'),
+('Dr. Paradox', 'Futuristisk navigation');
