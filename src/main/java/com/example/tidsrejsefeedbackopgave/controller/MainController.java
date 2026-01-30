@@ -3,7 +3,7 @@ package com.example.tidsrejsefeedbackopgave.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,7 +11,7 @@ import java.net.URL;
 public class MainController {
 
     @FXML
-    private BorderPane root;
+    private StackPane contentArea;
 
     @FXML
     private void initialize() {
@@ -20,30 +20,30 @@ public class MainController {
 
     @FXML
     private void showCustomers() {
-        setCenter("customers-view.fxml");
+        loadView("customers-view.fxml");
     }
 
     @FXML
     private void showTimeMachines() {
-        setCenter("time-machines-view.fxml");
+        loadView("time-machines-view.fxml");
     }
 
     @FXML
     private void showTimePeriods() {
-        setCenter("time-periods-view.fxml");
+        loadView("time-periods-view.fxml");
     }
 
     @FXML
     private void showGuides() {
-        setCenter("guides-view.fxml");
+        loadView("guides-view.fxml");
     }
 
     @FXML
     private void showBooking() {
-        setCenter("booking-view.fxml");
+        loadView("booking-view.fxml");
     }
 
-    private void setCenter(String fxml) {
+    private void loadView(String fxml) {
         String path = "/com/example/tidsrejsefeedbackopgave/" + fxml;
 
         URL resource = getClass().getResource(path);
@@ -54,7 +54,7 @@ public class MainController {
 
         try {
             Node view = FXMLLoader.load(resource);
-            root.setCenter(view);
+            contentArea.getChildren().setAll(view);
         } catch (IOException e) {
             System.err.println("[FXML] Could not load: " + path);
             System.err.println("Reason: " + e.getMessage());
