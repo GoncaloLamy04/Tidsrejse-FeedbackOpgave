@@ -1,4 +1,4 @@
-package DB;
+package com.example.tidsrejsefeedbackopgave.DB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

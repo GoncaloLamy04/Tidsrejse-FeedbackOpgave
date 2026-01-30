@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.tidsrejsefeedbackopgave/com.example.tidsrejsefeedbackopgave.HelloApplication
+                                com.example.tidsrejsefeedbackopgave/com.example.tidsrejsefeedbackopgave.AppLauncher.TimeTravelApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
